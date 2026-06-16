@@ -1,0 +1,151 @@
+/* ==================================================
+   GLOBAL
+================================================== */
+
+body {
+
+    background: #F4F7FB;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    color: #2D3748;
+
+}
+
+
+/* ==================================================
+   HEADER
+================================================== */
+
+.dashboard-header {
+
+    padding-top: 15px;
+
+    padding-bottom: 15px;
+
+}
+
+.dashboard-header h1 {
+
+    font-size: 56px;
+
+    font-weight: 800;
+
+    color: #1B365D;
+
+    margin-bottom: 0px;
+
+}
+
+.dashboard-header h2 {
+
+    font-size: 28px;
+
+    color: #2563EB;
+
+    margin-top: 0px;
+
+}
+
+.dashboard-header p {
+
+    font-size: 18px;
+
+    color: #64748B;
+
+}
+
+
+/* ==================================================
+   KPI CARDS
+================================================== */
+
+.card {
+
+    border-radius: 18px;
+
+    border: none;
+
+    background: white;
+
+    box-shadow:
+
+        0px 3px 12px rgba(0,0,0,0.08);
+
+}
+
+
+.card-header {
+
+    background: #1B365D !important;
+
+    color: white !important;
+
+    text-align: center;
+
+    font-weight: 700;
+
+}
+
+
+.card-body {
+
+    padding: 25px;
+
+}
+
+
+.card-body h2 {
+
+    color: #2563EB;
+
+    font-size: 42px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+}
+
+
+/* ==================================================
+   HEADINGS
+================================================== */
+
+h3 {
+
+    color: #1B365D;
+
+    font-weight: 700;
+
+}
+
+
+/* ==================================================
+   TABLE
+================================================== */
+
+thead {
+
+    background: #1B365D;
+
+    color: white;
+
+}
+
+tbody tr:nth-child(even){
+
+    background:#F8FAFC;
+
+}
+
+
+/* ==================================================
+   HR
+================================================== */
+
+hr{
+
+    border-top:2px solid #E2E8F0;
+
+}
