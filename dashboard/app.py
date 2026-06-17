@@ -8,9 +8,9 @@ import pandas as pd
 
 from modules.overview import overview_page, overview_server
 from modules.explorer import explorer_page, explorer_server
-from modules.relationships import relationships_page
-from modules.regression import regression_page
-from modules.simulator import simulator_page
+from modules.relationships import relationships_page, relationships_server
+from modules.regression import regression_page, regression_server
+from modules.simulator import simulator_page, simulator_server
 from modules.about import about_page
 
  
@@ -75,7 +75,12 @@ def server(input, output, session):
     overview_server(input, output, session, summary)
 
     explorer_server(input, output, session, summary)
-
+    
+    relationships_server(input, output, session, summary)
+    
+    regression_server(input, output, session, summary)
+    
+    simulator_server(input, output, session, summary)
  
 # Create App
 

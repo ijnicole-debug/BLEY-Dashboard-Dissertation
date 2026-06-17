@@ -1,17 +1,17 @@
-
 from shiny import ui, render
 from shinywidgets import output_widget, render_plotly
 
+import pandas as pd
 import plotly.express as px
 
 
 # =====================================================
-# Explorer Page
+# Borough Explorer Page
 # =====================================================
 
 def explorer_page(summary):
 
-    boroughs = sorted(summary["df"]["borough"].unique())
+    boroughs = sorted(summary["df"]["borough"].tolist())
 
     return ui.nav_panel(
 
@@ -21,18 +21,20 @@ def explorer_page(summary):
 
         ui.p(
             """
-            Explore educational attainment and deprivation
-            indicators for individual London boroughs.
+            Select a London borough to explore its educational
+            attainment and socioeconomic indicators.
             """
         ),
 
         ui.input_select(
 
-            "selected_borough",
+            "borough",
 
             "Select Borough",
 
-            choices=boroughs
+            choices=boroughs,
+
+            selected=boroughs[0]
 
         ),
 
@@ -42,9 +44,9 @@ def explorer_page(summary):
 
             ui.card(
 
-                ui.card_header("Borough Profile"),
+                ui.card_header("Borough Statistics"),
 
-                ui.output_table("borough_table")
+                ui.output_table("borough_profile")
 
             ),
 
@@ -52,7 +54,7 @@ def explorer_page(summary):
 
                 ui.card_header("GLD Comparison"),
 
-                output_widget("borough_chart")
+                output_widget("borough_gld_chart")
 
             ),
 
@@ -64,7 +66,7 @@ def explorer_page(summary):
 
 
 # =====================================================
-# Explorer Server
+# Borough Explorer Server
 # =====================================================
 
 def explorer_server(input, output, session, summary):
@@ -72,13 +74,13 @@ def explorer_server(input, output, session, summary):
     df = summary["df"]
 
     @render.table
-    def borough_table():
+    def borough_profile():
 
-        borough = input.selected_borough()
+        borough = input.borough()
 
         row = df[df["borough"] == borough].iloc[0]
 
-        profile = {
+        profile = pd.DataFrame({
 
             "Metric": [
 
@@ -124,21 +126,22 @@ def explorer_server(input, output, session, summary):
 
             ]
 
-        }
+        })
 
         return profile
 
 
     @render_plotly
-    def borough_chart():
+    def borough_gld_chart():
 
-        borough = input.selected_borough()
+        borough = input.borough()
 
-        row = df[df["borough"] == borough].iloc[0]
+        borough_gld = df.loc[
+            df["borough"] == borough,
+            "gld"
+        ].iloc[0]
 
-        london_average = summary["avg_gld"]
-
-        chart_df = {
+        comparison = pd.DataFrame({
 
             "Category": [
 
@@ -150,17 +153,17 @@ def explorer_server(input, output, session, summary):
 
             "GLD": [
 
-                row["gld"],
+                borough_gld,
 
-                london_average
+                summary["avg_gld"]
 
             ]
 
-        }
+        })
 
         fig = px.bar(
 
-            chart_df,
+            comparison,
 
             x="Category",
 
@@ -172,17 +175,27 @@ def explorer_server(input, output, session, summary):
 
         )
 
+        fig.update_traces(
+
+            texttemplate="%{text:.1f}",
+
+            textposition="outside"
+
+        )
+
         fig.update_layout(
 
             height=450,
 
             showlegend=False,
 
+            xaxis_title="",
+
+            yaxis_title="GLD (%)",
+
             plot_bgcolor="white",
 
-            paper_bgcolor="white",
-
-            title=None
+            paper_bgcolor="white"
 
         )
 
