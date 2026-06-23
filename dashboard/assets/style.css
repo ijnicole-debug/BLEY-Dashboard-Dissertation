@@ -1,10 +1,17 @@
-/* ==================================================
+
+/* ===========================================================
+   BLEY EDUCATIONAL ANALYTICS DASHBOARD
+   Professional London Analytics Theme
+=========================================================== */
+
+
+/* ===========================================================
    GLOBAL
-================================================== */
+=========================================================== */
 
 body {
 
-    background: #F4F7FB;
+    background-color: #F4F7FB;
 
     font-family: "Segoe UI", Arial, sans-serif;
 
@@ -13,15 +20,13 @@ body {
 }
 
 
-/* ==================================================
+/* ===========================================================
    HEADER
-================================================== */
+=========================================================== */
 
 .dashboard-header {
 
-    padding-top: 15px;
-
-    padding-bottom: 15px;
+    margin-bottom: 25px;
 
 }
 
@@ -41,9 +46,11 @@ body {
 
     font-size: 28px;
 
+    font-weight: 500;
+
     color: #2563EB;
 
-    margin-top: 0px;
+    margin-top: 5px;
 
 }
 
@@ -53,24 +60,40 @@ body {
 
     color: #64748B;
 
+    max-width: 900px;
+
 }
 
 
-/* ==================================================
-   KPI CARDS
-================================================== */
+/* ===========================================================
+   DEFAULT CARDS
+=========================================================== */
 
-.card {
+.card.bslib-card {
 
-    border-radius: 18px;
+    border: none !important;
 
-    border: none;
+    border-radius: 18px !important;
+
+    overflow: hidden;
 
     background: white;
 
     box-shadow:
 
-        0px 3px 12px rgba(0,0,0,0.08);
+        0 4px 14px rgba(0,0,0,.08);
+
+    transition: all .25s ease;
+
+}
+
+.card.bslib-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+
+        0 10px 25px rgba(0,0,0,.12);
 
 }
 
@@ -81,9 +104,9 @@ body {
 
     color: white !important;
 
-    text-align: center;
-
     font-weight: 700;
+
+    border: none !important;
 
 }
 
@@ -97,33 +120,217 @@ body {
 
 .card-body h2 {
 
-    color: #2563EB;
+    text-align: center;
 
     font-size: 42px;
 
+    font-weight: 700;
+
+    color: #2563EB;
+
+}
+
+.card-body h4 {
+
     text-align: center;
 
-    font-weight: bold;
+    font-weight: 600;
 
 }
 
 
-/* ==================================================
+/* ===========================================================
+   KPI BLUE
+=========================================================== */
+
+.card.kpi-blue {
+
+    background: linear-gradient(135deg,#1B365D,#2563EB) !important;
+
+}
+
+.card.kpi-blue .card-header,
+.card.kpi-blue .card-body {
+
+    background: transparent !important;
+
+}
+
+.card.kpi-blue .card-header,
+.card.kpi-blue h2,
+.card.kpi-blue h4,
+.card.kpi-blue p {
+
+    color: white !important;
+
+}
+
+
+/* ===========================================================
+   KPI GREEN
+=========================================================== */
+
+.card.kpi-green {
+
+    background: linear-gradient(135deg,#198754,#34D399) !important;
+
+}
+
+.card.kpi-green .card-header,
+.card.kpi-green .card-body {
+
+    background: transparent !important;
+
+}
+
+.card.kpi-green .card-header,
+.card.kpi-green h2,
+.card.kpi-green h4,
+.card.kpi-green p {
+
+    color: white !important;
+
+}
+
+
+/* ===========================================================
+   KPI ORANGE
+=========================================================== */
+
+.card.kpi-orange {
+
+    background: linear-gradient(135deg,#F59E0B,#F97316) !important;
+
+}
+
+.card.kpi-orange .card-header,
+.card.kpi-orange .card-body {
+
+    background: transparent !important;
+
+}
+
+.card.kpi-orange .card-header,
+.card.kpi-orange h2,
+.card.kpi-orange h4,
+.card.kpi-orange p {
+
+    color: white !important;
+
+}
+
+
+/* ===========================================================
+   KPI PURPLE
+=========================================================== */
+
+.card.kpi-purple {
+
+    background: linear-gradient(135deg,#6F42C1,#8B5CF6) !important;
+
+}
+
+.card.kpi-purple .card-header,
+.card.kpi-purple .card-body {
+
+    background: transparent !important;
+
+}
+
+.card.kpi-purple .card-header,
+.card.kpi-purple h2,
+.card.kpi-purple h4,
+.card.kpi-purple p {
+
+    color: white !important;
+
+}
+
+
+/* ===========================================================
+   KPI RED
+=========================================================== */
+
+.card.kpi-red {
+
+    background: linear-gradient(135deg,#DC3545,#EF4444) !important;
+
+}
+
+.card.kpi-red .card-header,
+.card.kpi-red .card-body {
+
+    background: transparent !important;
+
+}
+
+.card.kpi-red .card-header,
+.card.kpi-red h2,
+.card.kpi-red h4,
+.card.kpi-red p {
+
+    color: white !important;
+
+}
+
+
+/* ===========================================================
+   KPI TEAL
+=========================================================== */
+
+.card.kpi-teal {
+
+    background: linear-gradient(135deg,#0F766E,#14B8A6) !important;
+
+}
+
+.card.kpi-teal .card-header,
+.card.kpi-teal .card-body {
+
+    background: transparent !important;
+
+}
+
+.card.kpi-teal .card-header,
+.card.kpi-teal h2,
+.card.kpi-teal h4,
+.card.kpi-teal p {
+
+    color: white !important;
+
+}
+
+
+/* ===========================================================
    HEADINGS
-================================================== */
+=========================================================== */
 
 h3 {
 
     color: #1B365D;
 
+    font-size: 34px;
+
     font-weight: 700;
+
+    margin-top: 30px;
+
+    margin-bottom: 20px;
 
 }
 
 
-/* ==================================================
-   TABLE
-================================================== */
+/* ===========================================================
+   TABLES
+=========================================================== */
+
+table {
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
 
 thead {
 
@@ -133,19 +340,63 @@ thead {
 
 }
 
-tbody tr:nth-child(even){
+tbody tr:nth-child(even) {
 
-    background:#F8FAFC;
+    background: #F8FAFC;
 
 }
 
 
-/* ==================================================
-   HR
-================================================== */
+/* ===========================================================
+   HORIZONTAL RULE
+=========================================================== */
 
-hr{
+hr {
 
-    border-top:2px solid #E2E8F0;
+    border-top: 2px solid #E2E8F0;
+
+}
+
+
+/* ===========================================================
+   PLOTLY
+=========================================================== */
+
+.js-plotly-plot {
+
+    border-radius: 15px;
+
+}
+
+
+/* ===========================================================
+   NAVBAR
+=========================================================== */
+
+.navbar {
+
+    background: #1B365D !important;
+
+}
+
+.navbar-brand {
+
+    color: white !important;
+
+    font-weight: 700;
+
+}
+
+.nav-link {
+
+    color: rgba(255,255,255,.85) !important;
+
+}
+
+.nav-link.active {
+
+    color: white !important;
+
+    font-weight: 700;
 
 }

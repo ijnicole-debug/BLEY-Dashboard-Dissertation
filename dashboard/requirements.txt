@@ -1,6 +1,6 @@
 
 # BLEY Educational Analytics Dashboard
-# MSc Data Analytics Dissertation
+# MSc Business Analytics Dissertation
 
 
 shiny>=1.6.3
