@@ -10,6 +10,7 @@ from modules.overview import overview_page, overview_server
 from modules.explorer import explorer_page, explorer_server
 from modules.relationships import relationships_page, relationships_server
 from modules.regression import regression_page, regression_server
+from modules.recommendations import recommendations_page, recommendations_server
 from modules.simulator import simulator_page, simulator_server
 from modules.about import about_page
 
@@ -58,6 +59,8 @@ app_ui = ui.page_navbar(
     relationships_page(summary),
 
     regression_page(summary),
+    
+    recommendations_page(summary),
 
     simulator_page(summary),
 
@@ -79,6 +82,8 @@ def server(input, output, session):
     relationships_server(input, output, session, summary)
     
     regression_server(input, output, session, summary)
+    
+    recommendations_server(input, output, session, summary)
     
     simulator_server(input, output, session, summary)
  
