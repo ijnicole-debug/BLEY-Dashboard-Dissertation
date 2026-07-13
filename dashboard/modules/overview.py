@@ -147,17 +147,7 @@ def overview_page(summary):
 
         ui.h3("📊 Good Level of Development by Borough"),
 
-        output_widget("gld_chart"),
-
-        ui.hr(),
-
-        # -------------------------------------------------
-        # FSM Chart
-        # -------------------------------------------------
-
-        ui.h3("📈 Relationship Between FSM and GLD"),
-
-        output_widget("fsm_chart")
+        output_widget("gld_chart")
 
     )
 

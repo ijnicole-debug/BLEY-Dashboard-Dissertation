@@ -3,6 +3,15 @@ from shinywidgets import output_widget, render_plotly
 
 import pandas as pd
 import plotly.express as px
+import json
+
+
+# =====================================================
+# Load GeoJSON
+# =====================================================
+
+with open("data/london_boroughs_wgs84.geojson", "r") as f:
+    london_geojson = json.load(f)
 
 
 # =====================================================
@@ -11,56 +20,46 @@ import plotly.express as px
 
 def explorer_page(summary):
 
-    boroughs = sorted(summary["df"]["borough"].tolist())
-
     return ui.nav_panel(
 
         "📊 Borough Explorer",
 
-        ui.h2("Borough Explorer"),
+        ui.h2("London Borough Explorer"),
 
         ui.p(
             """
-            Select a London borough to explore its educational
-            attainment and socioeconomic indicators.
+            Explore educational outcomes across Greater London.
+            Select a metric below to colour the map.
             """
         ),
 
         ui.input_select(
 
-            "borough",
+            "map_metric",
 
-            "Select Borough",
+            "Display Metric",
 
-            choices=boroughs,
+            choices={
 
-            selected=boroughs[0]
+                "gld": "Good Level of Development (GLD)",
+
+                "fsm": "Free School Meals (FSM)",
+
+                "sen": "Special Educational Needs (SEN)",
+
+                "idaci": "Income Deprivation (IDACI)",
+
+                "childcare_per_100": "Childcare per 100 Children"
+
+            },
+
+            selected="gld"
 
         ),
 
-        ui.hr(),
+        ui.br(),
 
-        ui.layout_columns(
-
-            ui.card(
-
-                ui.card_header("Borough Statistics"),
-
-                ui.output_table("borough_profile")
-
-            ),
-
-            ui.card(
-
-                ui.card_header("GLD Comparison"),
-
-                output_widget("borough_gld_chart")
-
-            ),
-
-            col_widths=(5,7)
-
-        )
+        output_widget("borough_map")
 
     )
 
@@ -73,131 +72,46 @@ def explorer_server(input, output, session, summary):
 
     df = summary["df"]
 
-    @render.table
-    def borough_profile():
-
-        borough = input.borough()
-
-        row = df[df["borough"] == borough].iloc[0]
-
-        profile = pd.DataFrame({
-
-            "Metric": [
-
-                "Good Level of Development (%)",
-
-                "Free School Meals (%)",
-
-                "Special Educational Needs (%)",
-
-                "IDACI",
-
-                "Ofsted",
-
-                "Total Places",
-
-                "Under 5 Population",
-
-                "Childcare per 100",
-
-                "Ethnic Diversity"
-
-            ],
-
-            "Value": [
-
-                round(row["gld"],1),
-
-                round(row["fsm"],1),
-
-                round(row["sen"],1),
-
-                round(row["idaci"],1),
-
-                round(row["ofsted"],1),
-
-                int(row["total_places"]),
-
-                int(row["under5"]),
-
-                round(row["childcare_per_100"],1),
-
-                round(row["ethnic_diversity"],1)
-
-            ]
-
-        })
-
-        return profile
-
-
     @render_plotly
-    def borough_gld_chart():
+    def borough_map():
 
-        borough = input.borough()
+        metric = input.map_metric()
 
-        borough_gld = df.loc[
-            df["borough"] == borough,
-            "gld"
-        ].iloc[0]
-
-        comparison = pd.DataFrame({
-
-            "Category": [
-
-                borough,
-
-                "London Average"
-
-            ],
-
-            "GLD": [
-
-                borough_gld,
-
-                summary["avg_gld"]
-
-            ]
-
-        })
-
-        fig = px.bar(
-
-            comparison,
-
-            x="Category",
-
-            y="GLD",
-
-            color="Category",
-
-            text="GLD"
-
-        )
-
-        fig.update_traces(
-
-            texttemplate="%{text:.1f}",
-
-            textposition="outside"
-
+        fig = px.choropleth_map(
+            df,
+            geojson=london_geojson,
+            locations="borough",
+            featureidkey="properties.name",
+            color=metric,
+            hover_name="borough",
+            hover_data={
+                "gld": True,
+                "fsm": True,
+                "sen": True,
+                "idaci": True,
+                "childcare_per_100": True
+            },
+            center={
+                "lat": 51.5074,
+                "lon": -0.1278
+            },
+            zoom=8.8,
+            opacity=0.8,
+            map_style="carto-positron",
+            color_continuous_scale="RdYlGn"
         )
 
         fig.update_layout(
 
-            height=450,
+            margin=dict(
+                l=0,
+                r=0,
+                t=0,
+                b=0
+            ),
 
-            showlegend=False,
-
-            xaxis_title="",
-
-            yaxis_title="GLD (%)",
-
-            plot_bgcolor="white",
-
-            paper_bgcolor="white"
+            height=700
 
         )
 
         return fig
-
