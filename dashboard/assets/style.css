@@ -1,4 +1,3 @@
-
 /* ===========================================================
    BLEY EDUCATIONAL ANALYTICS DASHBOARD
    Professional London Analytics Theme
@@ -10,13 +9,9 @@
 =========================================================== */
 
 body {
-
     background-color: #F4F7FB;
-
     font-family: "Segoe UI", Arial, sans-serif;
-
     color: #2D3748;
-
 }
 
 
@@ -25,43 +20,27 @@ body {
 =========================================================== */
 
 .dashboard-header {
-
     margin-bottom: 25px;
-
 }
 
 .dashboard-header h1 {
-
     font-size: 56px;
-
     font-weight: 800;
-
     color: #1B365D;
-
     margin-bottom: 0px;
-
 }
 
 .dashboard-header h2 {
-
     font-size: 28px;
-
     font-weight: 500;
-
     color: #2563EB;
-
     margin-top: 5px;
-
 }
 
 .dashboard-header p {
-
     font-size: 18px;
-
     color: #64748B;
-
     max-width: 900px;
-
 }
 
 
@@ -70,234 +49,152 @@ body {
 =========================================================== */
 
 .card.bslib-card {
-
     border: none !important;
-
     border-radius: 18px !important;
-
     overflow: hidden;
-
     background: white;
-
-    box-shadow:
-
-        0 4px 14px rgba(0,0,0,.08);
-
+    box-shadow: 0 4px 14px rgba(0,0,0,.08);
     transition: all .25s ease;
-
 }
 
 .card.bslib-card:hover {
-
     transform: translateY(-4px);
-
-    box-shadow:
-
-        0 10px 25px rgba(0,0,0,.12);
-
+    box-shadow: 0 10px 25px rgba(0,0,0,.12);
 }
-
 
 .card-header {
-
     background: #1B365D !important;
-
     color: white !important;
-
     font-weight: 700;
-
     border: none !important;
-
 }
-
 
 .card-body {
-
     padding: 25px;
-
 }
 
-
 .card-body h2 {
-
     text-align: center;
-
     font-size: 42px;
-
     font-weight: 700;
-
     color: #2563EB;
-
 }
 
 .card-body h4 {
-
     text-align: center;
-
     font-weight: 600;
-
 }
 
 
 /* ===========================================================
-   KPI BLUE
+   OVERVIEW CARDS
+
+   A single blue family replaces the six hues previously defined
+   here. Colour on the Overview is decorative and carries no
+   meaning, so that hue continues to signal direction only where
+   it is defined to: the Explorer map, the charts and the
+   evidence tiers. Six unrelated hues implied distinctions
+   between indicators that do not exist.
 =========================================================== */
 
-.card.kpi-blue {
-
-    background: linear-gradient(135deg,#1B365D,#2563EB) !important;
-
+.card.kpi-card {
+    background: linear-gradient(135deg, #1B365D, #2563EB) !important;
 }
 
-.card.kpi-blue .card-header,
-.card.kpi-blue .card-body {
-
+.card.kpi-card .card-header,
+.card.kpi-card .card-body {
     background: transparent !important;
-
 }
 
-.card.kpi-blue .card-header,
-.card.kpi-blue h2,
-.card.kpi-blue h4,
-.card.kpi-blue p {
+.card.kpi-card .card-header {
+    border-bottom: 1px solid rgba(255,255,255,.18) !important;
+    font-size: 15px;
+}
 
+.card.kpi-card .card-header,
+.card.kpi-card h2,
+.card.kpi-card h4,
+.card.kpi-card p {
     color: white !important;
+}
 
+.card.kpi-card h2 {
+    font-size: 38px;
+}
+
+
+/* Key Insights: lighter treatment so the two groups read as
+   different sections without introducing a second hue. */
+
+.card.insight-card {
+    background: #FFFFFF !important;
+    border-top: 5px solid #2563EB !important;
+}
+
+.card.insight-card .card-header {
+    background: #EAF1FB !important;
+    color: #1B365D !important;
+    font-size: 15px;
+}
+
+.card.insight-card h4 {
+    color: #1B365D !important;
+    font-size: 20px;
+}
+
+.card.insight-card h2 {
+    color: #2563EB !important;
+    font-size: 34px;
 }
 
 
 /* ===========================================================
-   KPI GREEN
+   INTERPRETATION GUIDANCE (Section 7.3)
 =========================================================== */
 
-.card.kpi-green {
-
-    background: linear-gradient(135deg,#198754,#34D399) !important;
-
+.bley-caveat {
+    background: #FFF4E5;
+    border-left: 4px solid #C77700;
+    padding: 10px 14px;
+    margin: 8px 0 16px 0;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: #4A3000;
+    border-radius: 6px;
 }
 
-.card.kpi-green .card-header,
-.card.kpi-green .card-body {
-
-    background: transparent !important;
-
+.bley-footnote {
+    font-size: 0.8rem;
+    color: #5A5A5A;
+    margin-top: 6px;
+    line-height: 1.5;
 }
 
-.card.kpi-green .card-header,
-.card.kpi-green h2,
-.card.kpi-green h4,
-.card.kpi-green p {
-
-    color: white !important;
-
+.bley-tier {
+    font-size: 0.78rem;
+    color: #5A5A5A;
+    margin: -6px 0 10px 2px;
 }
 
-
-/* ===========================================================
-   KPI ORANGE
-=========================================================== */
-
-.card.kpi-orange {
-
-    background: linear-gradient(135deg,#F59E0B,#F97316) !important;
-
+.bley-warning {
+    background: #FDECEA;
+    border-left: 4px solid #B3261E;
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-size: 0.85rem;
+    color: #5F1512;
+    border-radius: 6px;
 }
 
-.card.kpi-orange .card-header,
-.card.kpi-orange .card-body {
-
-    background: transparent !important;
-
+.bley-meta {
+    font-size: 0.8rem;
+    color: #5A5A5A;
+    margin-top: 24px;
 }
 
-.card.kpi-orange .card-header,
-.card.kpi-orange h2,
-.card.kpi-orange h4,
-.card.kpi-orange p {
-
-    color: white !important;
-
-}
-
-
-/* ===========================================================
-   KPI PURPLE
-=========================================================== */
-
-.card.kpi-purple {
-
-    background: linear-gradient(135deg,#6F42C1,#8B5CF6) !important;
-
-}
-
-.card.kpi-purple .card-header,
-.card.kpi-purple .card-body {
-
-    background: transparent !important;
-
-}
-
-.card.kpi-purple .card-header,
-.card.kpi-purple h2,
-.card.kpi-purple h4,
-.card.kpi-purple p {
-
-    color: white !important;
-
-}
-
-
-/* ===========================================================
-   KPI RED
-=========================================================== */
-
-.card.kpi-red {
-
-    background: linear-gradient(135deg,#DC3545,#EF4444) !important;
-
-}
-
-.card.kpi-red .card-header,
-.card.kpi-red .card-body {
-
-    background: transparent !important;
-
-}
-
-.card.kpi-red .card-header,
-.card.kpi-red h2,
-.card.kpi-red h4,
-.card.kpi-red p {
-
-    color: white !important;
-
-}
-
-
-/* ===========================================================
-   KPI TEAL
-=========================================================== */
-
-.card.kpi-teal {
-
-    background: linear-gradient(135deg,#0F766E,#14B8A6) !important;
-
-}
-
-.card.kpi-teal .card-header,
-.card.kpi-teal .card-body {
-
-    background: transparent !important;
-
-}
-
-.card.kpi-teal .card-header,
-.card.kpi-teal h2,
-.card.kpi-teal h4,
-.card.kpi-teal p {
-
-    color: white !important;
-
+.bley-section h4 {
+    margin-top: 18px;
+    margin-bottom: 6px;
 }
 
 
@@ -306,17 +203,11 @@ body {
 =========================================================== */
 
 h3 {
-
     color: #1B365D;
-
     font-size: 34px;
-
     font-weight: 700;
-
     margin-top: 30px;
-
     margin-bottom: 20px;
-
 }
 
 
@@ -325,25 +216,17 @@ h3 {
 =========================================================== */
 
 table {
-
     border-radius: 10px;
-
     overflow: hidden;
-
 }
 
 thead {
-
     background: #1B365D;
-
     color: white;
-
 }
 
 tbody tr:nth-child(even) {
-
     background: #F8FAFC;
-
 }
 
 
@@ -352,9 +235,7 @@ tbody tr:nth-child(even) {
 =========================================================== */
 
 hr {
-
     border-top: 2px solid #E2E8F0;
-
 }
 
 
@@ -363,9 +244,7 @@ hr {
 =========================================================== */
 
 .js-plotly-plot {
-
     border-radius: 15px;
-
 }
 
 
@@ -374,29 +253,19 @@ hr {
 =========================================================== */
 
 .navbar {
-
     background: #1B365D !important;
-
 }
 
 .navbar-brand {
-
     color: white !important;
-
     font-weight: 700;
-
 }
 
 .nav-link {
-
     color: rgba(255,255,255,.85) !important;
-
 }
 
 .nav-link.active {
-
     color: white !important;
-
     font-weight: 700;
-
 }
