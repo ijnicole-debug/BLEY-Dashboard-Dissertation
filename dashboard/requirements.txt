@@ -1,24 +1,18 @@
+
 # BLEY Educational Analytics Dashboard
 # MSc Business Analytics Dissertation
-#
-# Built and tested on Python 3.13.
 
-# --- Application framework
-shiny==1.6.3
-shinywidgets==0.7.0
-htmltools==0.6.0
-jinja2==3.1.6
 
-# --- Data handling
-pandas==2.3.0
-numpy==2.3.0
+shiny>=1.6.3
+shinywidgets>=0.7.0
 
-# --- Statistics
-# scipy provides pearsonr and shapiro, used in regression.py and
-# simulator.py. It installs as a dependency of statsmodels but is listed
-# explicitly because the application imports it directly.
-statsmodels==0.14.5
-scipy==1.16.0
+pandas>=2.3.0
+numpy>=2.3.0
 
-# --- Visualisation
-plotly==6.8.0
+plotly>=6.8.0
+statsmodels>=0.14.5
+
+jinja2>=3.1.6
+
+htmltools>=0.6.0
+
