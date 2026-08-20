@@ -2,9 +2,6 @@
 # MSc Business Analytics Dissertation
 #
 # Built and tested on Python 3.13.
-#
-# Versions are pinned exactly so the environment can be reconstructed as tested, consistent with the #deployment risk mitigation described in Section 7.3 of the dissertation. Replace the versions below with the
-#output of `pip freeze` if your installed versions differ.
 
 # --- Application framework
 shiny==1.6.3
@@ -17,7 +14,9 @@ pandas==2.3.0
 numpy==2.3.0
 
 # --- Statistics
-# scipy provides pearsonr and shapiro, used in regression.py and simulator.py. It installs as a dependency #of statsmodels but is listed explicitly because the application imports it directly.
+# scipy provides pearsonr and shapiro, used in regression.py and
+# simulator.py. It installs as a dependency of statsmodels but is listed
+# explicitly because the application imports it directly.
 statsmodels==0.14.5
 scipy==1.16.0
 
