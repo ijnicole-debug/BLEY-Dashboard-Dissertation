@@ -11,9 +11,6 @@ from scipy import stats
 # =====================================================
 # Model specification
 #
-# FULL_PREDICTORS is the pre-specified model derived from the conceptual
-# framework in Section 2.8. REDUCED_PREDICTORS is reported as a sensitivity
-# analysis, because 32 boroughs cannot support six predictors reliably.
 # =====================================================
 
 OUTCOME = "gld"
@@ -34,8 +31,7 @@ ALPHA = 0.05
 
 
 # =====================================================
-# Interpretation guidance (Section 7.3 of the dissertation)
-# NOTE: duplicated in relationships.py. Move both into components.py.
+# Interpretation guidance 
 # =====================================================
 
 CAVEAT_TEXT = (
@@ -77,10 +73,7 @@ def caveat_banner():
 #
 # Each factor is assessed twice: on its own, through a bivariate
 # correlation, and alongside the other factors, through the multiple
-# regression. Reporting both is necessary because closely related
-# predictors can each be significant alone while neither survives when
-# both sit in the same model. Thresholds must match Section 3.7.4.
-# Symbols differ in shape as well as colour (WCAG 2.1, 1.4.1).
+# regression. 
 # =====================================================
 
 def evidence_tier(p_bivariate, p_multivariate):

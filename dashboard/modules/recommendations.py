@@ -4,8 +4,7 @@ import pandas as pd
 
 
 # =====================================================
-# Interpretation guidance (Section 7.3 of the dissertation)
-# NOTE: duplicated across the page modules. Move into components.py.
+# Interpretation guidance 
 # =====================================================
 
 CAVEAT_TEXT = (
@@ -52,9 +51,7 @@ def caveat_banner(text=CAVEAT_TEXT):
 #
 # Each criterion states the column it uses, the direction the user is
 # assumed to prefer when they give it weight, and the units shown in the
-# results table. Directions are stated on screen rather than applied
-# silently, because inverting an indicator without saying so turns a
-# descriptive measure into an implicit judgement.
+# results table. 
 # =====================================================
 
 CRITERIA = {

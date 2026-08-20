@@ -18,8 +18,7 @@ DATA_CURRENT_AS_AT = "August 2026"
 
 
 # =====================================================
-# Interpretation guidance (Section 7.3 of the dissertation)
-# NOTE: duplicated across the page modules. Move into components.py.
+# Interpretation guidance 
 # =====================================================
 
 CAVEAT_TEXT = (
@@ -64,7 +63,6 @@ def caveat_banner(text=CAVEAT_TEXT):
 
 # =====================================================
 # Data sources
-# (indicator, publisher, reference period, url)
 # =====================================================
 
 SOURCES = [

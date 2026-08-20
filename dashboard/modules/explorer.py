@@ -36,8 +36,7 @@ FEATURE_KEY = "properties.name"
 
 
 # =====================================================
-# Interpretation guidance (Section 7.3 of the dissertation)
-# NOTE: duplicated across the page modules. Move into components.py.
+# Interpretation guidance 
 # =====================================================
 
 CAVEAT_TEXT = (
@@ -84,10 +83,6 @@ def caveat_banner():
 # The colour scale is chosen from that declaration, so deprivation is never
 # shaded as though it were a good outcome. Metrics with no inherent
 # direction use a neutral sequential scale and say so.
-#
-# RdYlBu is used in place of RdYlGn because red-green scales are not
-# distinguishable for the most common forms of colour vision deficiency
-# (WCAG 2.1, success criterion 1.4.1).
 # =====================================================
 
 HIGHER_BETTER = "higher_better"

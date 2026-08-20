@@ -123,9 +123,7 @@ summary = {
 # Shared styling
 #
 # The theme lives in style.css. A minimal fallback for the
-# interpretation banner is injected inline as well, so that the guidance
-# required by Section 7.3 still renders visibly if the stylesheet fails
-# to load.
+# interpretation banner is injected inline as well.
 # =====================================================
 
 CSS_CANDIDATES = [

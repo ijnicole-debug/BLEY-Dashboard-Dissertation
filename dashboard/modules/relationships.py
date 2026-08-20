@@ -55,7 +55,6 @@ def caveat_banner():
 # =====================================================
 # Correlation strength bands - Evans (1996)
 # Bands are continuous, so every coefficient falls in exactly one band.
-# These thresholds must match Section 3.7.3 of the dissertation.
 # =====================================================
 
 def strength_label(r):

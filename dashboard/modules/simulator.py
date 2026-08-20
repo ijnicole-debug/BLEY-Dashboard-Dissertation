@@ -7,10 +7,6 @@ from scipy import stats
 
 # =====================================================
 # Model specification
-#
-# The simulator uses the same pre-specified model reported on the
-# Regression Results page, so the two pages cannot disagree. Coefficients
-# are fitted from the master dataset at run time rather than hardcoded.
 # =====================================================
 
 OUTCOME = "gld"
@@ -42,9 +38,7 @@ ALPHA = 0.05
 
 
 # =====================================================
-# Interpretation guidance (Section 7.3 of the dissertation)
-# NOTE: duplicated in relationships.py and regression.py.
-# Move all three into components.py.
+# Interpretation guidance 
 # =====================================================
 
 CAVEAT_TEXT = (

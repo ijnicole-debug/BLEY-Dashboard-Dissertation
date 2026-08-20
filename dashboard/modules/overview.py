@@ -5,9 +5,6 @@ import plotly.express as px
 
 
 # =====================================================
-# Interpretation guidance (Section 7.3 of the dissertation)
-# NOTE: duplicated in relationships.py, regression.py and simulator.py.
-# Move all four into components.py.
 # =====================================================
 
 CAVEAT_TEXT = (
@@ -16,6 +13,7 @@ CAVEAT_TEXT = (
     "describe any individual child or family."
 )
 
+# .kpi-def, .bley-explainer and .bley-group belong in style.css
 CAVEAT_CSS = """
 .bley-caveat {
     background: #FFF4E5;
@@ -32,11 +30,52 @@ CAVEAT_CSS = """
     margin-top: 6px;
     line-height: 1.5;
 }
+.kpi-def {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    color: rgba(255,255,255,.88) !important;
+    margin: 6px 0 0 0;
+    text-align: center;
+}
+.bley-explainer {
+    background: #F5F9FD;
+    border-left: 4px solid #2563EB;
+    padding: 14px 18px;
+    margin: 8px 0 18px 0;
+    border-radius: 6px;
+    line-height: 1.5;
+}
+.bley-explainer h4 {
+    color: #1B365D;
+    margin: 0 0 6px 0;
+    font-size: 1.05rem;
+    text-align: left;
+}
+.bley-group {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1B365D;
+    margin: 4px 0 8px 2px;
+}
 """
 
 
 def caveat_banner():
     return ui.div(CAVEAT_TEXT, class_="bley-caveat")
+
+
+def kpi(header, value, definition):
+    """A headline figure with a plain-language definition beneath it.
+
+    Testing found that acronyms and bare numbers were the most common
+    source of confusion, so no figure is shown without a definition.
+    """
+    return ui.card(
+        ui.card_header(header),
+        ui.h2(value),
+        ui.p(definition, class_="kpi-def"),
+        class_="kpi-card",
+    )
 
 
 # =====================================================
@@ -71,7 +110,7 @@ def overview_page(summary):
             ui.p(
                 "Exploring how socioeconomic, childcare and demographic "
                 "indicators vary alongside Good Level of Development outcomes "
-                "across London boroughs."
+                f"across all {len(df)} London boroughs."
             ),
 
             class_="dashboard-header"
@@ -80,83 +119,94 @@ def overview_page(summary):
 
         caveat_banner(),
 
+        # -------------------------------------------------
+        # What the outcome measure means
+        # Added after testing: participants asked for an explanation of GLD.
+        # -------------------------------------------------
+
+        ui.div(
+            ui.h4("What is a Good Level of Development?"),
+            ui.p(
+                "At the end of the reception year, teachers assess every child "
+                "against the Early Years Foundation Stage Profile. A child who "
+                "reaches the expected standard in communication and language, "
+                "physical development, personal, social and emotional "
+                "development, literacy and mathematics is recorded as having "
+                "reached a Good Level of Development, or GLD. The figures "
+                "below show the percentage of children in each borough who did "
+                "so in the 2022/23 academic year."
+            ),
+            class_="bley-explainer",
+        ),
+
         ui.hr(),
 
         # -------------------------------------------------
         # KPI Cards
+        # Reduced from eight to six after testing, and grouped, in
+        # response to feedback that the page carried too many figures.
         # -------------------------------------------------
+
+        ui.div("Outcomes and childcare provision", class_="bley-group"),
 
         ui.layout_columns(
 
-            ui.card(
-                ui.card_header("🏛 London Boroughs"),
-                ui.h2(f"{len(df)}"),
-                class_="kpi-card"
+            kpi(
+                "📈 Average GLD",
+                f"{summary['avg_gld']:.1f}%",
+                f"Across London. Boroughs range from {gld_min:.1f}% to "
+                f"{gld_max:.1f}%.",
             ),
 
-            ui.card(
-                ui.card_header("📈 Average GLD (%)"),
-                ui.h2(f"{summary['avg_gld']:.1f}"),
-                class_="kpi-card"
+            kpi(
+                "🧸 Childcare Places",
+                f"{avg_childcare:.1f}",
+                "Registered early years places for every 100 children aged "
+                "under five.",
             ),
 
-            ui.card(
-                ui.card_header("📊 GLD Range (%)"),
-                ui.h2(f"{gld_min:.1f} – {gld_max:.1f}"),
-                class_="kpi-card"
+            kpi(
+                "⭐ Ofsted Quality",
+                f"{avg_ofsted:.2f}",
+                "Average inspection grade, weighted by provider size. "
+                "4 is Outstanding, 1 is Inadequate.",
             ),
 
-            ui.card(
-                ui.card_header("🧸 Childcare Places per 100"),
-                ui.h2(f"{avg_childcare:.1f}"),
-                class_="kpi-card"
-            ),
-
-            col_widths=(3, 3, 3, 3)
+            col_widths=(4, 4, 4),
 
         ),
 
         ui.br(),
 
+        ui.div("Local context", class_="bley-group"),
+
         ui.layout_columns(
 
-            ui.card(
-                ui.card_header("🎓 Average FSM (%)"),
-                ui.h2(f"{summary['avg_fsm']:.1f}"),
-                class_="kpi-card"
+            kpi(
+                "🎓 Free School Meals",
+                f"{summary['avg_fsm']:.1f}%",
+                "Share of pupils eligible for Free School Meals (FSM), used "
+                "here as an indicator of concentrated disadvantage.",
             ),
 
-            ui.card(
-                ui.card_header("🧩 Average SEN (%)"),
-                ui.h2(f"{summary['avg_sen']:.1f}"),
-                class_="kpi-card"
+            kpi(
+                "🌍 Income Deprivation",
+                f"{summary['avg_idaci']:.3f}",
+                "Income Deprivation Affecting Children Index (IDACI): the "
+                "share of children in income-deprived households, so "
+                f"{summary['avg_idaci']:.3f} means about "
+                f"{summary['avg_idaci'] * 100:.0f} in every 100.",
             ),
 
-            ui.card(
-                ui.card_header("🌍 Average IDACI"),
-                ui.h2(f"{summary['avg_idaci']:.3f}"),
-                class_="kpi-card"
+            kpi(
+                "🧩 Special Educational Needs",
+                f"{summary['avg_sen']:.1f}%",
+                "Share of pupils identified as having Special Educational "
+                "Needs (SEN) and requiring additional support.",
             ),
 
-            ui.card(
-                ui.card_header("⭐ Ofsted Quality (4 = Outstanding)"),
-                ui.h2(f"{avg_ofsted:.2f}"),
-                class_="kpi-card"
-            ),
+            col_widths=(4, 4, 4),
 
-            col_widths=(3, 3, 3, 3)
-
-        ),
-
-        ui.div(
-            "IDACI is the proportion of children in a borough living in "
-            "income-deprived households, so a score of "
-            f"{summary['avg_idaci']:.3f} means around "
-            f"{summary['avg_idaci'] * 100:.1f}% of children on average. "
-            "Ofsted quality is a places-weighted average of inspection "
-            "judgements, rescaled so that 4 is Outstanding and 1 is "
-            "Inadequate; providers without an inspection grade are excluded.",
-            class_="bley-footnote",
         ),
 
         ui.hr(),
@@ -210,18 +260,19 @@ def overview_page(summary):
         ui.h3("📊 Good Level of Development by Borough"),
 
         ui.p(
-            "Boroughs are ordered from highest to lowest. The dashed line "
-            "marks the Greater London average."
+            "Each dot is one borough, ordered from highest to lowest. The "
+            "dashed line marks the London average, so dots to the right of it "
+            "are above average and dots to the left are below."
         ),
 
         output_widget("gld_chart"),
 
         ui.div(
-            "Values are shown on a scale covering the observed range rather "
-            "than starting at zero, so position along the axis carries the "
-            "comparison. Differences between boroughs are smaller than the "
-            "spacing suggests: all 32 fall within "
-            f"{gld_max - gld_min:.1f} percentage points of one another.",
+            "The scale covers the observed range rather than starting at "
+            "zero, so position along the axis carries the comparison. "
+            "Differences between boroughs are smaller than the spacing "
+            f"suggests: all {len(df)} fall within {gld_max - gld_min:.1f} "
+            "percentage points of one another.",
             class_="bley-footnote",
         ),
 
@@ -249,11 +300,14 @@ def overview_server(input, output, session, summary):
             hover_name="borough",
             labels={
                 "borough": "London Borough",
-                "gld": "Good Level of Development (%)",
+                "gld": "Children reaching a Good Level of Development (%)",
             },
         )
 
-        fig.update_traces(marker=dict(size=11, color="#1F4E79"))
+        fig.update_traces(
+            marker=dict(size=11, color="#1F4E79"),
+            hovertemplate="%{hovertext}<br>%{x:.1f}% reached GLD<extra></extra>",
+        )
 
         fig.add_vline(
             x=mean_gld,
@@ -266,7 +320,7 @@ def overview_server(input, output, session, summary):
         fig.update_layout(
             height=760,
             title=None,
-            xaxis_title="Good Level of Development (%)",
+            xaxis_title="Children reaching a Good Level of Development (%)",
             yaxis_title=None,
             plot_bgcolor="white",
             paper_bgcolor="white",
