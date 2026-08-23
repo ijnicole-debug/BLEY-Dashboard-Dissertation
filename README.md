@@ -90,32 +90,45 @@ Official publicly available datasets were obtained from:
 ## Repository Structure
 
 ```
-BLEY-Dashboard/
+BLEY-Dashboard-Dissertation/
 │
-├── assets/
-├── components/
-├── data/
+├── dashboard/
+│   ├── assets/
+│   │   └── style.css
+│   ├── components/
+│   │   └── cards.py
+│   ├── data/
+│   │   ├── master_dataset.csv
+│   │   ├── london_boroughs.geojson
+│   │   └── london_boroughs_wgs84.geojson
+│   ├── modules/
+│   │   ├── __init__.py
+│   │   ├── about.py
+│   │   ├── explorer.py
+│   │   ├── overview.py
+│   │   ├── recommendations.py
+│   │   ├── regression.py
+│   │   ├── relationships.py
+│   │   └── simulator.py
+│   ├── app.py
+│   └── requirements.txt
 │
-├── images/
-├── modules/
 ├── notebooks/
-├── shiny_env/
-│
-├── app.py
-├── recommendations.py
-├── requirements.txt
+├── data_clean/
+├── images/
+├── .gitignore
 ├── README.md
 └── LICENSE
 ```
 
 ---
-
 ## Running the Dashboard
 
-Clone the repository
+Clone the repository and enter the dashboard directory
 
 ```bash
 git clone https://github.com/ijnicole-debug/BLEY-Dashboard-Dissertation.git
+cd BLEY-Dashboard-Dissertation/dashboard
 ```
 
 Create a virtual environment
@@ -132,6 +145,12 @@ Windows
 shiny_env\Scripts\activate
 ```
 
+macOS and Linux
+
+```bash
+source shiny_env/bin/activate
+```
+
 Install dependencies
 
 ```bash
@@ -143,6 +162,8 @@ Launch the application
 ```bash
 shiny run app.py
 ```
+
+The application must be launched from the `dashboard/` directory. On startup it validates the master dataset and will not start if any check fails.
 
 ---
 
